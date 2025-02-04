@@ -20,9 +20,9 @@ namespace BCVP.Net8.Extensions.ServiceExtensions
         protected override void Load(ContainerBuilder builder)
         {
             var basePath = AppContext.BaseDirectory;
-
-            var servicesDllFile = Path.Combine(basePath, "BCVP.Net8.Service.dll");
-            var repositoryDllFile = Path.Combine(basePath, "BCVP.Net8.Repository.dll");
+            var dllProjectName = Assembly.GetEntryAssembly()?.GetName().Name;
+            var servicesDllFile = Path.Combine(basePath, dllProjectName + ".Service.dll");
+            var repositoryDllFile = Path.Combine(basePath, dllProjectName + ".Repository.dll");
 
             var aopTypes = new List<Type>() { typeof(ServiceAOP), typeof(TranAOP) };
             builder.RegisterType<ServiceAOP>();
